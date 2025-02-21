@@ -2,7 +2,7 @@
   "name": "aic",
   "displayName": "aic",
   "description": "",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.97.0"
   },
@@ -11,9 +11,14 @@
   ],
   "activationEvents": [
     "onLanguage:javascript",
-    "onLanguage:php"
+    "onLanguage:php",
+    "onLanguage:python"
   ],
   "main": "./extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codelint/aic"
+  },
   "contributes": {
     "commands": [
       {

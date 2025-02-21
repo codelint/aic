@@ -90,7 +90,7 @@ For more information, visit the [GitHub repository](https://github.com/codelint/
 
 ## Contributing
 
-We welcome contributions from the community! If you'd like to contribute to AIC, please check out our [GitHub repository](https://github.com/your-username/aic) and submit a pull request.
+We welcome contributions from the community! If you'd like to contribute to AIC, please check out our [GitHub repository](https://github.com/codelint/aic) and submit a pull request.
 
 ## License
 

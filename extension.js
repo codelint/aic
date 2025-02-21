@@ -63,6 +63,39 @@ function activate(context) {
                         vscode.window.showInformationMessage('No editor');
                     }
                 }
+
+                if (document.languageId === 'python') {
+                    const editor = vscode.window.activeTextEditor;
+            
+                    if (editor && editor.document === document) {
+                        const text = document.getText();
+                        const lines = text.split('\n');
+            
+                        for (let i = 1; i < lines.length - 1; i++) {
+                            const currentLine = lines[i];
+                            const prevLine = lines[i - 1];
+                            const nextLine = lines[i + 1];
+            
+                            if (currentLine.trim() === '' && prevLine.trim() !== '' && nextLine.trim() !== '') {
+                                const prevIndent = getIndentation(prevLine);
+                                const nextIndent = getIndentation(nextLine);
+            
+                                if (prevIndent === nextIndent) {
+                                    const range = new vscode.Range(
+                                        new vscode.Position(i, 0),
+                                        new vscode.Position(i, currentLine.length)
+                                    );
+            
+                                    editor.edit(editBuilder => {
+                                        editBuilder.replace(range, ' '.repeat(prevIndent));
+                                    });
+            
+                                    lastReplaceTime = currentTime; // 更新最后替换时间
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }catch(e){
             vscode.window.showErrorMessage(e.showErrorMessage);
@@ -86,6 +119,12 @@ function activate(context) {
 	// });
 
 	// context.subscriptions.push(disposable);
+}
+
+// 获取某一行的缩进空格数
+function getIndentation(line) {
+    const match = line.match(/^(\s*)/);
+    return match ? match[0].length : 0;
 }
 
 function activate2(context) {
